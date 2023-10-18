@@ -5,13 +5,15 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import es.oesia.spring1.Persona;
-import es.oesia.spring1.repositorios.jdbc.PersonaRepository;
+import es.oesia.spring1.repositorios.PersonaRepository;
 
 @Service
 public class PersonaService {
 
 	private final PersonaRepository personaRepo;
 
+	//que esto es una interface y ahora tenemos dos implementaciones
+	
 	public PersonaService(PersonaRepository personaRepo) {
 		super();
 		this.personaRepo = personaRepo;

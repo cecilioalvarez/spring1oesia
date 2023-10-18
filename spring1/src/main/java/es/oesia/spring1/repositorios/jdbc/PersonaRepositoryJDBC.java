@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.oesia.spring1.Persona;
+import es.oesia.spring1.repositorios.PersonaRepository;
 import es.oesia.spring1.repositorios.jdbc.mappers.PersonaMapper;
 
 @Repository

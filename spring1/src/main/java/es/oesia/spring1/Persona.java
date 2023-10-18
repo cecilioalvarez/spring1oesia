@@ -1,17 +1,14 @@
 package es.oesia.spring1;
 
-public class Persona {
+import es.oesia.spring1.models.BaseEntity;
+import jakarta.persistence.Entity;
 
-	private int id;
+@Entity
+public class Persona extends BaseEntity {
+
 	private String nombre;
 	private String apellidos;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -33,8 +30,7 @@ public class Persona {
 	
 	
 	public Persona(int id, String nombre, String apellidos) {
-		super();
-		this.id = id;
+		
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 	}
@@ -43,11 +39,11 @@ public class Persona {
 	}
 	public Persona(int id) {
 		super();
-		this.id = id;
+	
 	}
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + "]";
+		return "Persona [id=" + getId() + ", nombre=" + nombre + ", apellidos=" + apellidos + "]";
 	}
 	
 	

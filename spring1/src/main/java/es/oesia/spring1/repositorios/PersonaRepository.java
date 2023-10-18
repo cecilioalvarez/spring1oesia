@@ -1,4 +1,4 @@
-package es.oesia.spring1.repositorios.jdbc;
+package es.oesia.spring1.repositorios;
 
 import java.util.List;
 
