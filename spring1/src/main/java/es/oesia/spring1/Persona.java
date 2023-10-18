@@ -2,8 +2,10 @@ package es.oesia.spring1;
 
 import es.oesia.spring1.models.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="personas")
 public class Persona extends BaseEntity {
 
 	private String nombre;

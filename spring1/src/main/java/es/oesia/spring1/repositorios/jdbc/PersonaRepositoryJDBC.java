@@ -2,8 +2,8 @@ package es.oesia.spring1.repositorios.jdbc;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +12,7 @@ import es.oesia.spring1.repositorios.PersonaRepository;
 import es.oesia.spring1.repositorios.jdbc.mappers.PersonaMapper;
 
 @Repository
+@Qualifier("jdbc")
 public class PersonaRepositoryJDBC implements PersonaRepository {
 	
 	//inyeccion de dependencia basada en el constructor

@@ -2,10 +2,14 @@ package es.oesia.spring1.repositorios.jpa;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
 import es.oesia.spring1.Persona;
 import es.oesia.spring1.repositorios.PersonaRepository;
 import jakarta.persistence.EntityManager;
-
+@Repository
+@Qualifier("jpa")
 public class PersonaRepositoryJPA implements PersonaRepository {
 
 	

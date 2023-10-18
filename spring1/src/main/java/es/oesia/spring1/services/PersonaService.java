@@ -2,6 +2,7 @@ package es.oesia.spring1.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import es.oesia.spring1.Persona;
@@ -14,7 +15,7 @@ public class PersonaService {
 
 	//que esto es una interface y ahora tenemos dos implementaciones
 	
-	public PersonaService(PersonaRepository personaRepo) {
+	public PersonaService(@Qualifier("jpa") PersonaRepository personaRepo) {
 		super();
 		this.personaRepo = personaRepo;
 	}
