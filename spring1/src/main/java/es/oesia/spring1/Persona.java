@@ -30,9 +30,26 @@ public class Persona {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 	}
+	
+	
+	public Persona(int id, String nombre, String apellidos) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+	}
 	public Persona() {
 		super();
 	}
+	public Persona(int id) {
+		super();
+		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + "]";
+	}
+	
 	
 	
 }

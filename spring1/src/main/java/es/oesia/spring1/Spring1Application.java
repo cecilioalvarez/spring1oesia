@@ -5,20 +5,24 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import es.oesia.spring1.services.PersonaService;
+
 @SpringBootApplication
 public class Spring1Application implements CommandLineRunner{
 
 	@Autowired
-	PersonaRepository repository;
+	PersonaService personaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Spring1Application.class, args);
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args)  {
 	
-		repository.insertar(new Persona("juan","sanchez"));
+	
+		System.out.println(personaService.buscarUno(1));
+		
 		
 	}
 
