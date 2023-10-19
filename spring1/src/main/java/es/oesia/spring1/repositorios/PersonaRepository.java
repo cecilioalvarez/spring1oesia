@@ -6,7 +6,7 @@ import es.oesia.spring1.Persona;
 
 public interface PersonaRepository {
 
-	void insertar(Persona persona);
+	Persona insertar(Persona persona);
 	void borrar(Persona persona);
 	void update(Persona persona);
 	List<Persona> buscarTodos();

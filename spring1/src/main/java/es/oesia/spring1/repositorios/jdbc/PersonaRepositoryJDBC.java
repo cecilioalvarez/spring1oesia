@@ -26,9 +26,10 @@ public class PersonaRepositoryJDBC implements PersonaRepository {
 
 	@Override
 	@Transactional
-	public void insertar(Persona persona) {
+	public Persona insertar(Persona persona) {
 		
 		plantilla.update("insert into Personas (nombre,apellidos) values (?,?)", persona.getNombre(),persona.getApellidos());
+		return persona;
 	}
 	
 	

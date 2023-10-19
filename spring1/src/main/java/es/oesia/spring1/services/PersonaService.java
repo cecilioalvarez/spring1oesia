@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.oesia.spring1.Persona;
 import es.oesia.spring1.repositorios.PersonaRepository;
@@ -20,15 +21,22 @@ public class PersonaService {
 		this.personaRepo = personaRepo;
 	}
 
-	public void insertar(Persona persona) {
-		personaRepo.insertar(persona);
+	@Transactional
+	public Persona insertar(Persona persona) {
+		return personaRepo.insertar(persona);
+		
 	}
-
+	@Transactional
 	public void borrar(Persona persona) {
 		personaRepo.borrar(persona);
 	}
-
-	public void update(Persona persona) {
+	@Transactional
+	public void update(int id,Persona persona) {
+		//hemos hecho dos operativas una buscar
+		//abriendo la transcion y otra salver
+		Persona personaActualizar= buscarUno(id);
+		personaActualizar.setNombre(persona.getNombre());
+		personaActualizar.setApellidos(persona.getApellidos());
 		personaRepo.update(persona);
 	}
 

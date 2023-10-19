@@ -22,30 +22,33 @@ public class PersonaRepositoryJPA implements PersonaRepository {
 	}
 
 	@Transactional
-	public void insertar(Persona persona) {
+	public Persona insertar(Persona persona) {
 		em.persist(persona);
+		return persona;
 
 	}
 
-	@Override
+	@Transactional
 	public void borrar(Persona persona) {
-		// TODO Auto-generated method stub
+		em.remove(em.merge(persona));
 
 	}
 
 	@Override
+	@Transactional
 	public void update(Persona persona) {
-		// TODO Auto-generated method stub
+		
+		em.merge(persona);
 
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public List<Persona> buscarTodos() {
 		// TODO Auto-generated method stub
 		return em.createQuery("select p from Persona p",Persona.class).getResultList();
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public Persona buscarUno(int id) {
 		// TODO Auto-generated method stub
 		return em.find(Persona.class, id);
