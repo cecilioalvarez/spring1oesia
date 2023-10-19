@@ -1,15 +1,8 @@
 package es.oesia.spring1.repositorios;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
-import es.oesia.spring1.Persona;
+import es.oesia.spring1.models.Persona;
 
-public interface PersonaRepository {
-
-	Persona insertar(Persona persona);
-	void borrar(Persona persona);
-	void update(Persona persona);
-	List<Persona> buscarTodos();
-	Persona buscarUno(int id);
-
+public interface PersonaRepository  extends CrudRepository<Persona, Integer>{
 }

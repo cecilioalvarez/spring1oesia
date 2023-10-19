@@ -1,9 +1,6 @@
-package es.oesia.spring1;
-
-import java.util.List;
+package es.oesia.spring1.controllers;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.oesia.spring1.excepciones.RecursoNotFoundException;
+import es.oesia.spring1.models.Persona;
 import es.oesia.spring1.services.PersonaService;
 
 @RestController
@@ -27,13 +26,17 @@ public class PersonaRestController {
 		this.servicioPersona = servicioPersona;
 	}
 	@GetMapping
-	public List<Persona> buscarTodos() {
+	public Iterable<Persona> buscarTodos() {
 		
 		return servicioPersona.buscarTodos();
 	}
+	
+	
 	@GetMapping("/{id}")
 	public Persona buscarUno(@PathVariable int id) {
-		return servicioPersona.buscarUno(id);
+		
+		return  servicioPersona.buscarUno(id).map(o->o).orElseThrow(()-> new RecursoNotFoundException("no existe la persona"));
+		
 	}
 	@PostMapping
 	@ResponseStatus(value=HttpStatus.CREATED)
@@ -45,13 +48,14 @@ public class PersonaRestController {
 	
 	
 	@DeleteMapping("/{id}")
+	@ResponseStatus(value=HttpStatus.NO_CONTENT)
 	public void borrar(@PathVariable int id) {
 		servicioPersona.borrar(new Persona (id));
 	}
 	@PutMapping("/{id}")
-	public void actualizar(@PathVariable int id,@RequestBody Persona persona) {
+	public Persona actualizar(@PathVariable int id,@RequestBody Persona persona) {
 	
-		servicioPersona.update(id,persona);
+		return servicioPersona.update(id,persona);
 	}
 	
 	

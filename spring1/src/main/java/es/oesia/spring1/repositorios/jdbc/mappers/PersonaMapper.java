@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import es.oesia.spring1.Persona;
+import es.oesia.spring1.models.Persona;
 
 public class PersonaMapper implements RowMapper<Persona>{
 	@Override

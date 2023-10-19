@@ -1,7 +1,11 @@
-package es.oesia.spring1;
+package es.oesia.spring1.models;
 
-import es.oesia.spring1.models.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -11,6 +15,18 @@ public class Persona extends BaseEntity {
 	private String nombre;
 	private String apellidos;
 
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="categorias_id")
+	private Categoria categoria;
+	
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	public String getNombre() {
 		return nombre;
 	}

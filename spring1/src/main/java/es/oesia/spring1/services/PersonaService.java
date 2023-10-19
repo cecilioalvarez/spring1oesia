@@ -1,51 +1,52 @@
 package es.oesia.spring1.services;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.oesia.spring1.Persona;
+import es.oesia.spring1.models.Persona;
 import es.oesia.spring1.repositorios.PersonaRepository;
 
 @Service
 public class PersonaService {
 
 	private final PersonaRepository personaRepo;
-
-	//que esto es una interface y ahora tenemos dos implementaciones
 	
-	public PersonaService(@Qualifier("jpa") PersonaRepository personaRepo) {
+	public PersonaService( PersonaRepository personaRepo) {
 		super();
 		this.personaRepo = personaRepo;
 	}
 
 	@Transactional
 	public Persona insertar(Persona persona) {
-		return personaRepo.insertar(persona);
+		return personaRepo.save(persona);
 		
 	}
 	@Transactional
 	public void borrar(Persona persona) {
-		personaRepo.borrar(persona);
+		personaRepo.delete(persona);
 	}
 	@Transactional
-	public void update(int id,Persona persona) {
+	public Persona update(int id,Persona persona) {
 		//hemos hecho dos operativas una buscar
 		//abriendo la transcion y otra salver
-		Persona personaActualizar= buscarUno(id);
-		personaActualizar.setNombre(persona.getNombre());
-		personaActualizar.setApellidos(persona.getApellidos());
-		personaRepo.update(persona);
+		Optional<Persona> oPersona= buscarUno(id);
+		if (oPersona.isPresent()) {
+			Persona personaActualizar=oPersona.get();
+			personaActualizar.setNombre(persona.getNombre());
+			personaActualizar.setApellidos(persona.getApellidos());
+			return personaRepo.save(persona);
+		}else {
+			return null;
+		}
 	}
-
-	public List<Persona> buscarTodos() {
-		return personaRepo.buscarTodos();
+	public Iterable<Persona> buscarTodos() {
+		return personaRepo.findAll();
 	}
-
-	public Persona buscarUno(int id) {
-		return personaRepo.buscarUno(id);
+	public Optional<Persona> buscarUno(int id) {
+		return personaRepo.findById(id);
 	}
 	
 }
