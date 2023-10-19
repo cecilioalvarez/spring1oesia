@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.oesia.spring1.Persona;
 import es.oesia.spring1.repositorios.PersonaRepository;
@@ -20,9 +21,9 @@ public class PersonaRepositoryJPA implements PersonaRepository {
 		this.em = em;
 	}
 
-	@Override
+	@Transactional
 	public void insertar(Persona persona) {
-		// TODO Auto-generated method stub
+		em.persist(persona);
 
 	}
 
@@ -41,7 +42,7 @@ public class PersonaRepositoryJPA implements PersonaRepository {
 	@Override
 	public List<Persona> buscarTodos() {
 		// TODO Auto-generated method stub
-		return null;
+		return em.createQuery("select p from Persona p",Persona.class).getResultList();
 	}
 
 	@Override
