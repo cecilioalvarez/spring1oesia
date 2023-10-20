@@ -3,7 +3,6 @@ package es.oesia.spring1.security;
 import java.util.Date;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.token.TokenService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
