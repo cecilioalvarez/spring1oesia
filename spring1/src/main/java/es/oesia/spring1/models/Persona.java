@@ -14,7 +14,15 @@ public class Persona extends BaseEntity {
 
 	private String nombre;
 	private String apellidos;
+	private int edad;
+	
 
+	public int getEdad() {
+		return edad;
+	}
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="categorias_id" )
@@ -39,18 +47,15 @@ public class Persona extends BaseEntity {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-	public Persona(String nombre, String apellidos) {
+	
+	
+	
+	
+	public Persona(String nombre, String apellidos, int edad) {
 		super();
-		
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-	}
-	
-	
-	public Persona(int id, String nombre, String apellidos) {
-		
-		this.nombre = nombre;
-		this.apellidos = apellidos;
+		this.edad = edad;
 	}
 	public Persona() {
 		super();

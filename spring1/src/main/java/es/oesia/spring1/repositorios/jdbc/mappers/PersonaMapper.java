@@ -11,6 +11,6 @@ public class PersonaMapper implements RowMapper<Persona>{
 	@Override
 	public Persona mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		return new Persona(rs.getInt("id"),rs.getString("nombre"),rs.getString("apellidos"));
+		return null ;// new Persona(rs.getInt("id"),rs.getString("nombre"),rs.getString("apellidos"));
 	}
 }

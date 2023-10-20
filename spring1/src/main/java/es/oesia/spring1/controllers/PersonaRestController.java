@@ -2,6 +2,7 @@ package es.oesia.spring1.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,25 +33,28 @@ public class PersonaRestController {
 	}
 	@GetMapping
 	public Iterable<PersonaCategoriaDTO> buscarTodos() {
-		List<PersonaCategoriaDTO> lista= new ArrayList<PersonaCategoriaDTO>();
+	
+		return 
+				servicioPersona
+				.buscarTodosConCategorias()
+				.stream()
+				.map(PersonaCategoriaTransformer::transformarToDTO)
+				.toList();
+		//return servicioPersona.buscarTodosConCategoriasdDTO();
 		
-		for (Persona p : servicioPersona.buscarTodosConCategorias()) {	
-			lista.add(PersonaCategoriaTransformer.transformar(p));
-		}	
-		return lista;
 	}
 	
 	
 	@GetMapping("/{id}")
-	public Persona buscarUno(@PathVariable int id) {
+	public PersonaCategoriaDTO buscarUno(@PathVariable int id) {
 		
 		//return  servicioPersona.buscarUno(id).map(o->o).orElseThrow(()-> new RecursoNotFoundException("no existe la persona"));
-		return  servicioPersona.buscarUno(id).orElseThrow(RecursoNotFoundException::new);
+		return  servicioPersona.buscarUno(id).map(PersonaCategoriaTransformer::transformarToDTO).orElseThrow(RecursoNotFoundException::new);
 				
 	}
 	@PostMapping
 	@ResponseStatus(value=HttpStatus.CREATED)
-	public Persona insertar(@RequestBody Persona persona) {
+	public PersonaCategoriaDTO insertar(@RequestBody PersonaCategoriaDTO persona) {
 		
 		return servicioPersona.insertar(persona);
 	}

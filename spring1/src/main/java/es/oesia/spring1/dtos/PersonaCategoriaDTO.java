@@ -7,6 +7,8 @@ public class PersonaCategoriaDTO implements Serializable {
 	private int id;
 	private String nombre;
 	private String apellidos;
+	private int edad;
+	
 	private int categoriaId;
 	private String nombreCategoria;
 	public int getId() {
@@ -39,6 +41,26 @@ public class PersonaCategoriaDTO implements Serializable {
 	public void setNombreCategoria(String nombreCategoria) {
 		this.nombreCategoria = nombreCategoria;
 	}
+	public int getEdad() {
+		return edad;
+	}
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+	public PersonaCategoriaDTO(int id, String nombre, String apellidos, int edad, int categoriaId,
+			String nombreCategoria) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.edad = edad;
+		this.categoriaId = categoriaId;
+		this.nombreCategoria = nombreCategoria;
+	}
+	public PersonaCategoriaDTO() {
+		super();
+	}
+	
 	
 	
 }
