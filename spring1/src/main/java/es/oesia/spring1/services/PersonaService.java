@@ -3,6 +3,7 @@ package es.oesia.spring1.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,12 +39,8 @@ public class PersonaService {
 		//es autonumerico
 		// es probable que la categoria la recibamos con id
 		
-		
 		Persona p= new Persona();
-		p.setNombre(personaDTO.getNombre());
-		p.setApellidos(personaDTO.getApellidos());
-		p.setEdad(personaDTO.getEdad());
-		
+		BeanUtils.copyProperties(personaDTO, p);
 		Optional<Categoria> categoria=categoriaRepo.findById(personaDTO.getCategoriaId());
 		if (categoria.isPresent()) {
 			
@@ -66,9 +63,8 @@ public class PersonaService {
 			// esta son los datos de la persona managed
 			Persona personaActualizar=oPersona.get();
 			
-				personaActualizar.setNombre(personaDTO.getNombre());
-			personaActualizar.setApellidos(personaDTO.getApellidos());
-			personaActualizar.setEdad(personaDTO.getEdad());
+			BeanUtils.copyProperties(personaDTO, personaActualizar);
+			
 			
 			Optional<Categoria> oCategoria= categoriaRepo.findById(personaDTO.getCategoriaId());
 			if (oCategoria.isPresent()) {
