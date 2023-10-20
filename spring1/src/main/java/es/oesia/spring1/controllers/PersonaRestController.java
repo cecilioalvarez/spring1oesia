@@ -1,9 +1,5 @@
 package es.oesia.spring1.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +34,7 @@ public class PersonaRestController {
 				servicioPersona
 				.buscarTodosConCategorias()
 				.stream()
-				.map(PersonaCategoriaTransformer::transformarToDTO)
+				.map(PersonaCategoriaTransformer::toDto)
 				.toList();
 		//return servicioPersona.buscarTodosConCategoriasdDTO();
 		
@@ -49,7 +45,7 @@ public class PersonaRestController {
 	public PersonaCategoriaDTO buscarUno(@PathVariable int id) {
 		
 		//return  servicioPersona.buscarUno(id).map(o->o).orElseThrow(()-> new RecursoNotFoundException("no existe la persona"));
-		return  servicioPersona.buscarUno(id).map(PersonaCategoriaTransformer::transformarToDTO).orElseThrow(RecursoNotFoundException::new);
+		return  servicioPersona.buscarUno(id).map(PersonaCategoriaTransformer::toDto).orElseThrow(RecursoNotFoundException::new);
 				
 	}
 	@PostMapping
@@ -67,7 +63,7 @@ public class PersonaRestController {
 		servicioPersona.borrar(new Persona (id));
 	}
 	@PutMapping("/{id}")
-	public Persona actualizar(@PathVariable int id,@RequestBody Persona persona) {
+	public PersonaCategoriaDTO actualizar(@PathVariable int id,@RequestBody PersonaCategoriaDTO persona) {
 	
 		return servicioPersona.update(id,persona);
 	}

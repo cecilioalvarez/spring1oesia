@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.oesia.spring1.dtos.PersonaCategoriaDTO;
+import es.oesia.spring1.excepciones.RecursoNotFoundException;
 import es.oesia.spring1.models.Categoria;
 import es.oesia.spring1.models.Persona;
 import es.oesia.spring1.repositorios.CategoriaRepository;
@@ -48,7 +49,7 @@ public class PersonaService {
 			
 			p.setCategoria(categoria.get());
 		}
-		return PersonaCategoriaTransformer.transformarToDTO(personaRepo.save(p));
+		return PersonaCategoriaTransformer.toDto(personaRepo.save(p));
 		
 	}
 	@Transactional
@@ -56,18 +57,35 @@ public class PersonaService {
 		personaRepo.delete(persona);
 	}
 	@Transactional
-	public Persona update(int id,Persona persona) {
+	public PersonaCategoriaDTO update(int id,PersonaCategoriaDTO personaDTO) {
 		//hemos hecho dos operativas una buscar
 		//abriendo la transcion y otra salver
 		Optional<Persona> oPersona= buscarUno(id);
 		if (oPersona.isPresent()) {
+			
+			// esta son los datos de la persona managed
 			Persona personaActualizar=oPersona.get();
-			personaActualizar.setNombre(persona.getNombre());
-			personaActualizar.setApellidos(persona.getApellidos());
-			return personaRepo.save(persona);
+			
+				personaActualizar.setNombre(personaDTO.getNombre());
+			personaActualizar.setApellidos(personaDTO.getApellidos());
+			personaActualizar.setEdad(personaDTO.getEdad());
+			
+			Optional<Categoria> oCategoria= categoriaRepo.findById(personaDTO.getCategoriaId());
+			if (oCategoria.isPresent()) {
+				
+				personaActualizar.setCategoria(oCategoria.get());
+				
+				
+			}
+			Persona personaSalvada=personaRepo.save(personaActualizar);
+			
+			return  PersonaCategoriaTransformer.toDto(personaSalvada);
+			
 		}else {
-			return null;
+			
+		 throw new RecursoNotFoundException("no existe la persona");
 		}
+		
 	}
 	public Iterable<Persona> buscarTodos() {
 		return personaRepo.findAll();
