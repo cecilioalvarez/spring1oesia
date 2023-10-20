@@ -18,7 +18,9 @@ public class PersonaService {
 		super();
 		this.personaRepo = personaRepo;
 	}
-
+	public List<Persona> buscarTodosConCategorias() {
+		return personaRepo.findAllWithCategories();
+	}
 	@Transactional
 	public Persona insertar(Persona persona) {
 		return personaRepo.save(persona);

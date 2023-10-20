@@ -17,7 +17,7 @@ public class Persona extends BaseEntity {
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="categorias_id")
+	@JoinColumn(name="categorias_id" )
 	private Categoria categoria;
 	
 	

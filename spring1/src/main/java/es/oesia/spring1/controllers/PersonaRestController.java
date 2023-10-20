@@ -1,5 +1,8 @@
 package es.oesia.spring1.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.oesia.spring1.dtos.PersonaCategoriaDTO;
 import es.oesia.spring1.excepciones.RecursoNotFoundException;
 import es.oesia.spring1.models.Persona;
 import es.oesia.spring1.services.PersonaService;
+import es.oesia.spring1.transformers.PersonaCategoriaTransformer;
 
 @RestController
 @RequestMapping("webapi/personas")
@@ -26,17 +31,22 @@ public class PersonaRestController {
 		this.servicioPersona = servicioPersona;
 	}
 	@GetMapping
-	public Iterable<Persona> buscarTodos() {
+	public Iterable<PersonaCategoriaDTO> buscarTodos() {
+		List<PersonaCategoriaDTO> lista= new ArrayList<PersonaCategoriaDTO>();
 		
-		return servicioPersona.buscarTodos();
+		for (Persona p : servicioPersona.buscarTodosConCategorias()) {	
+			lista.add(PersonaCategoriaTransformer.transformar(p));
+		}	
+		return lista;
 	}
 	
 	
 	@GetMapping("/{id}")
 	public Persona buscarUno(@PathVariable int id) {
 		
-		return  servicioPersona.buscarUno(id).map(o->o).orElseThrow(()-> new RecursoNotFoundException("no existe la persona"));
-		
+		//return  servicioPersona.buscarUno(id).map(o->o).orElseThrow(()-> new RecursoNotFoundException("no existe la persona"));
+		return  servicioPersona.buscarUno(id).orElseThrow(RecursoNotFoundException::new);
+				
 	}
 	@PostMapping
 	@ResponseStatus(value=HttpStatus.CREATED)
