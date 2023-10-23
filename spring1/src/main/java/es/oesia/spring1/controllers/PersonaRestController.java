@@ -2,8 +2,9 @@ package es.oesia.spring1.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -72,15 +74,16 @@ public class PersonaRestController {
 	}
 	
 	@GetMapping("/queries")
-	public List<Persona> buscarPorEjemplo(Persona persona ,OptionalInt pagina, OptionalInt items) {
-		
+	public List<Persona> buscarPorEjemplo(Persona persona ,@RequestParam (defaultValue="0") int pagina, @RequestParam (defaultValue="0") int items) {
 		System.out.println(pagina);
 		System.out.println(items);
-		
-		List<Persona> lista= new ArrayList<>();
-		
-		
-		return servicioPersona.buscarPorEjemplo(persona);
+		return servicioPersona.buscarPorEjemplo(persona,pagina,items);
+	}
+	
+	@GetMapping("/mayoredad")
+	public List<Persona> buscarMayorEdad() {
+	
+		return servicioPersona.buscarMayorEdad();
 	}
 	
 	
