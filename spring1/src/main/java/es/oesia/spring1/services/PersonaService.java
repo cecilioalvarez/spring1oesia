@@ -96,6 +96,7 @@ public class PersonaService {
 	}
 	public List<Persona> buscarPorEjemplo( Persona persona) {
 		
+	
 		ExampleMatcher macherBasico=
 				ExampleMatcher
 				.matching()

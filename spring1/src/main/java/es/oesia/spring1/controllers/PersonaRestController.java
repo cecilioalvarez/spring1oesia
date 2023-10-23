@@ -1,6 +1,8 @@
 package es.oesia.spring1.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +40,6 @@ public class PersonaRestController {
 				.stream()
 				.map(PersonaCategoriaTransformer::toDto)
 				.toList();
-		//return servicioPersona.buscarTodosConCategoriasdDTO();
 		
 	}
 	
@@ -71,20 +71,15 @@ public class PersonaRestController {
 		return servicioPersona.update(id,persona);
 	}
 	
-	@GetMapping("/ejemplo")
-	public List<Persona> buscarPorEjemplo(Persona persona) {
-		// estamos recibiendo una persona y esa persona esta guay
-		// que enviemos el nombre
+	@GetMapping("/queries")
+	public List<Persona> buscarPorEjemplo(Persona persona ,OptionalInt pagina, OptionalInt items) {
 		
-		//porque me has seleccionado el id el nombre y la edad
+		System.out.println(pagina);
+		System.out.println(items);
 		
-		//son muy importantes a nivel de la clave
-		//pero son numeridos ese es un problema
-		//porque sino le paso llega un 0
-		System.out.println(persona.getId());
-		System.out.println(persona.getNombre());
-		System.out.println(persona.getApellidos());
-		System.out.println(persona.getEdad());
+		List<Persona> lista= new ArrayList<>();
+		
+		
 		return servicioPersona.buscarPorEjemplo(persona);
 	}
 	
