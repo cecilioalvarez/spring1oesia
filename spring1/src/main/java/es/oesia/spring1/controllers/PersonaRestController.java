@@ -85,6 +85,22 @@ public class PersonaRestController {
 		return servicioPersona.buscarPorNombreyApellidos(nombre, apellidos);
 		
 	}
+	@GetMapping("/ejemplo")
+	public List<Persona> buscarPorEjemplo(Persona persona) {
+		// estamos recibiendo una persona y esa persona esta guay
+		// que enviemos el nombre
+		
+		//porque me has seleccionado el id el nombre y la edad
+		
+		//son muy importantes a nivel de la clave
+		//pero son numeridos ese es un problema
+		//porque sino le paso llega un 0
+		System.out.println(persona.getId());
+		System.out.println(persona.getNombre());
+		System.out.println(persona.getApellidos());
+		System.out.println(persona.getEdad());
+		return servicioPersona.buscarPorEjemplo(persona);
+	}
 	
 	
 }

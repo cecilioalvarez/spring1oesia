@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.oesia.spring1.dtos.PersonaCategoriaDTO;
 import es.oesia.spring1.excepciones.RecursoNotFoundException;
@@ -90,6 +94,7 @@ public class PersonaService {
 	public Optional<Persona> buscarUno(int id) {
 		return personaRepo.findById(id);
 	}
+	/*******************************************/
 	public List<Persona> buscarPorNombre(String nombre) {
 		return personaRepo.findByNombre(nombre);
 	}
@@ -98,6 +103,27 @@ public class PersonaService {
 	}
 	public List<Persona> buscarPorNombreyApellidos(String nombre, String appellidos) {
 		return personaRepo.findByNombreAndApellidos(nombre, appellidos);
+	}
+	/****************************************/
+	
+
+	public List<Persona> buscarPorEjemplo( Persona persona) {
+		
+		ExampleMatcher macherBasico=
+				ExampleMatcher
+				.matching()
+				.withIgnorePaths("id");
+		
+		if (persona.getEdad()==0) {
+			
+			macherBasico=macherBasico.withIgnorePaths("edad");
+		}
+			
+				
+				
+		Example<Persona> pEjemplo=Example.of(persona,macherBasico);
+		return personaRepo.findAll(pEjemplo);
+		
 	}
 	
 }
