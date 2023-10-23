@@ -93,5 +93,11 @@ public class PersonaService {
 	public List<Persona> buscarPorNombre(String nombre) {
 		return personaRepo.findByNombre(nombre);
 	}
+	public List<Persona> buscarPorApellidos(String apellidos) {
+		return personaRepo.findByApellidos(apellidos);
+	}
+	public List<Persona> buscarPorNombreyApellidos(String nombre, String appellidos) {
+		return personaRepo.findByNombreAndApellidos(nombre, appellidos);
+	}
 	
 }
