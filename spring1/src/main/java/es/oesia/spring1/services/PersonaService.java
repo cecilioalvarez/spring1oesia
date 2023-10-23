@@ -28,6 +28,7 @@ public class PersonaService {
 		this.categoriaRepo = categoriaRepo;
 	}
 	public List<Persona> buscarTodosConCategorias() {
+		
 		return personaRepo.findAllWithCategories();
 	}
 	public List<PersonaCategoriaDTO> buscarTodosConCategoriasdDTO() {
@@ -88,6 +89,9 @@ public class PersonaService {
 	}
 	public Optional<Persona> buscarUno(int id) {
 		return personaRepo.findById(id);
+	}
+	public List<Persona> buscarPorNombre(String nombre) {
+		return personaRepo.findByNombre(nombre);
 	}
 	
 }

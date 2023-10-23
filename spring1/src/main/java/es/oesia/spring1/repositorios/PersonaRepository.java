@@ -2,14 +2,17 @@ package es.oesia.spring1.repositorios;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import es.oesia.spring1.dtos.PersonaCategoriaDTO;
 import es.oesia.spring1.models.Persona;
 
-public interface PersonaRepository  extends CrudRepository<Persona, Integer>{
+public interface PersonaRepository  extends JpaRepository<Persona, Integer>{
 
+	List<Persona> findByNombre(String nombre);
+	
+	
 	@Query ("select distinct (p) from Persona p join fetch p.categoria")
 	public List<Persona> findAllWithCategories();
 	
