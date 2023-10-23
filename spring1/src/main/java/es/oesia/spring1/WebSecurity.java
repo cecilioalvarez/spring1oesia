@@ -16,6 +16,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import es.oesia.spring1.security.FiltroJWTAutenticacion;
 import es.oesia.spring1.security.FiltroLogin;
 
 @Configuration
@@ -65,9 +66,9 @@ public class WebSecurity {
 		.authenticated()
 		.and()
 		.addFilterBefore(new FiltroLogin("/webapi/login", manager),
+		UsernamePasswordAuthenticationFilter.class)
+		.addFilterBefore(new FiltroJWTAutenticacion(),
 		UsernamePasswordAuthenticationFilter.class);
-		//.addFilterBefore(new FiltroJWTAutenticacion(),
-		//UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 
 	}
