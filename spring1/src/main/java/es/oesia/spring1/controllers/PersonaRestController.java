@@ -70,21 +70,7 @@ public class PersonaRestController {
 	
 		return servicioPersona.update(id,persona);
 	}
-	@GetMapping(params= "nombre")
-	public List<Persona> buscarPorNombre(@RequestParam String nombre) {
-		return servicioPersona.buscarPorNombre(nombre);
-	}
 	
-	@GetMapping(params= "apellidos")
-	public List<Persona> buscarPorApellidos(@RequestParam String apellidos) {
-		return servicioPersona.buscarPorApellidos(apellidos);
-	}
-	
-	@GetMapping(params= {"nombre","apellidos"})
-	public List<Persona> buscarPorNombreyApellidos(@RequestParam(required = true) String nombre,@RequestParam (required = true) String apellidos) {
-		return servicioPersona.buscarPorNombreyApellidos(nombre, apellidos);
-		
-	}
 	@GetMapping("/ejemplo")
 	public List<Persona> buscarPorEjemplo(Persona persona) {
 		// estamos recibiendo una persona y esa persona esta guay

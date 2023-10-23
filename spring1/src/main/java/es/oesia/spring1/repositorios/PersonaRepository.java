@@ -10,13 +10,6 @@ import es.oesia.spring1.models.Persona;
 
 public interface PersonaRepository  extends JpaRepository<Persona, Integer>{
 
-	// pueden ser unos malos aliados porque 
-	// super comodo usar los query methods
-	List<Persona> findByNombre(String nombre);
-	List<Persona> findByApellidos(String apellidos);
-	List<Persona> findByNombreAndApellidos(String nombre ,String appellidos);
-	
-	
 	@Query ("select distinct (p) from Persona p join fetch p.categoria")
 	public List<Persona> findAllWithCategories();
 	

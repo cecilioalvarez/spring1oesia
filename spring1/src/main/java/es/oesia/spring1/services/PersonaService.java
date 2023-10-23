@@ -94,33 +94,15 @@ public class PersonaService {
 	public Optional<Persona> buscarUno(int id) {
 		return personaRepo.findById(id);
 	}
-	/*******************************************/
-	public List<Persona> buscarPorNombre(String nombre) {
-		return personaRepo.findByNombre(nombre);
-	}
-	public List<Persona> buscarPorApellidos(String apellidos) {
-		return personaRepo.findByApellidos(apellidos);
-	}
-	public List<Persona> buscarPorNombreyApellidos(String nombre, String appellidos) {
-		return personaRepo.findByNombreAndApellidos(nombre, appellidos);
-	}
-	/****************************************/
-	
-
 	public List<Persona> buscarPorEjemplo( Persona persona) {
 		
 		ExampleMatcher macherBasico=
 				ExampleMatcher
 				.matching()
 				.withIgnorePaths("id");
-		
 		if (persona.getEdad()==0) {
-			
 			macherBasico=macherBasico.withIgnorePaths("edad");
 		}
-			
-				
-				
 		Example<Persona> pEjemplo=Example.of(persona,macherBasico);
 		return personaRepo.findAll(pEjemplo);
 		
