@@ -3,6 +3,8 @@ package es.oesia.spring1.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -25,14 +27,21 @@ public class PersonaService {
 
 	private final PersonaRepository personaRepo;
 	private final CategoriaRepository categoriaRepo;
+	
+	private static final Logger milogger = LogManager.getLogger();
+	
 
 	public PersonaService(PersonaRepository personaRepo, CategoriaRepository categoriaRepo) {
-		super();
+		
+		milogger.info("acabamos de entrar en persona service en su constructor");
 		this.personaRepo = personaRepo;
 		this.categoriaRepo = categoriaRepo;
+		milogger.info("acabamos de salir en persona service en su constructor");
+
 	}
 
 	public List<Persona> buscarTodosConCategorias() {
+		milogger.info("acabamos de entrar en personaservice buscar todos con categorias");
 
 		return personaRepo.findAllWithCategories();
 	}
@@ -93,6 +102,8 @@ public class PersonaService {
 	}
 
 	public Iterable<Persona> buscarTodos() {
+		milogger.info("acabamos de entrar en personaservice buscar todos");
+
 		return personaRepo.findAll();
 	}
 

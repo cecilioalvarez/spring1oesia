@@ -3,6 +3,8 @@ package es.oesia.spring1.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -27,15 +29,20 @@ import es.oesia.spring1.transformers.PersonaCategoriaTransformer;
 @RequestMapping("webapi/personas")
 public class PersonaRestController {
 
+	private static final Logger milogger = LogManager.getLogger();
 	private PersonaService servicioPersona;
 
 	public PersonaRestController(PersonaService servicioPersona) {
-		super();
+		
+		milogger.info("acabamos de entrar en persona controller en su constructor");
+
 		this.servicioPersona = servicioPersona;
+		
 	}
 	@GetMapping
 	public Iterable<PersonaCategoriaDTO> buscarTodos() {
-	
+		milogger.info("acabamos de entrar en persona controller buscar todos");
+
 		return 
 				servicioPersona
 				.buscarTodosConCategorias()
