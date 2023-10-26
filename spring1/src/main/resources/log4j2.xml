@@ -5,11 +5,18 @@
 				pattern="%d{yyyy-MM-dd HH:MM:ss} -%C [%-6p] -- %m%n">
 			</PatternLayout>
 		</Console>
-		<File name="log" fileName="C:\Users\cecilioalvarezcaules\Desktop\oesialogtash\logstash-8.10.4\ficherosorigen\springlogs\spring.log"></File>
+		<File name="log" fileName="C:\Users\cecilioalvarezcaules\Desktop\oesialogtash\logstash-8.10.4\ficherosorigen\springlogs\spring.log">
+		
+		<PatternLayout
+				pattern="%level -- %m%n">
+			</PatternLayout>
+		
+		</File>
 	</Appenders>
 	<Loggers>
 		<Root level="info">
 			<AppenderRef ref="log"></AppenderRef>
+			<AppenderRef ref="consola"></AppenderRef>
 		</Root>
 <!-- 		<Logger name="org.hibernate.SQL" level="debug"> -->
 <!-- 			<AppenderRef ref="logsql"></AppenderRef> -->
