@@ -6,3 +6,26 @@ binding parameter [1] as [VARCHAR] - [perez104]
 binding parameter [2] as [INTEGER] - [2]
 binding parameter [3] as [INTEGER] - [23]
 binding parameter [4] as [VARCHAR] - [alberto104]
+select c1_0.id,c1_0.nombre from categorias c1_0 where c1_0.id=?
+binding parameter [1] as [INTEGER] - [1]
+insert into personas (apellidos,categorias_id,edad,nombre) values (?,?,?,?)
+binding parameter [1] as [VARCHAR] - [perez105]
+binding parameter [2] as [INTEGER] - [1]
+binding parameter [3] as [INTEGER] - [25]
+binding parameter [4] as [VARCHAR] - [alberto105]
+Statistics initialized [enabled=false]
+select c1_0.id,c1_0.nombre from categorias c1_0 where c1_0.id=?
+binding parameter [1] as [INTEGER] - [1]
+insert into personas (apellidos,categorias_id,edad,nombre) values (?,?,?,?)
+binding parameter [1] as [VARCHAR] - [perez105]
+binding parameter [2] as [INTEGER] - [1]
+binding parameter [3] as [INTEGER] - [25]
+binding parameter [4] as [VARCHAR] - [alberto105]
+Statistics initialized [enabled=true]
+select c1_0.id,c1_0.nombre from categorias c1_0 where c1_0.id=?
+binding parameter [1] as [INTEGER] - [1]
+insert into personas (apellidos,categorias_id,edad,nombre) values (?,?,?,?)
+binding parameter [1] as [VARCHAR] - [perez105]
+binding parameter [2] as [INTEGER] - [1]
+binding parameter [3] as [INTEGER] - [25]
+binding parameter [4] as [VARCHAR] - [alberto105]
