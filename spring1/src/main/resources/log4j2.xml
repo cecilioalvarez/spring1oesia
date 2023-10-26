@@ -8,7 +8,7 @@
 		<File name="log" fileName="C:\Users\cecilioalvarezcaules\Desktop\oesialogtash\logstash-8.10.4\ficherosorigen\springlogs\spring.log">
 		
 		<PatternLayout
-				pattern="%level -- %m%n">
+				pattern="%level ${hostName} -- %m%n">
 			</PatternLayout>
 		
 		</File>
