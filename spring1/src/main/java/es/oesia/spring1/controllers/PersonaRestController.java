@@ -94,4 +94,11 @@ public class PersonaRestController {
 	}
 	
 	
+	@GetMapping("/error")
+	public String error() {
+		milogger.error("la aplicacion ha petado mucho");
+		return "ok se ha generado un error";
+	}
+	
+	
 }
